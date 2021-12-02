@@ -1,0 +1,6 @@
+app==0.0.1
+Flask==2.0.2
+gunicorn==20.1.0
+pytube==11.0.1
+youtube-dl==2021.6.6
+uvicorn==0.15.0
