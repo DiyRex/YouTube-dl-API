@@ -19,6 +19,7 @@ app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
 APP_NAME = os.environ.get('APP_NAME')
+host_url = "https://" + APP_NAME + ".herokuapp.com"
 
 @app.before_first_request
 def initialize():
@@ -26,7 +27,8 @@ def initialize():
 
 @app.route("/")
 def runner():
-  return {"Stats":"Server Running !!!"}
+  info =  {"Stats":"Server Running !!!","Owned by":"DiyRex :)","Usage":[{"Get Data":host_url+"/data?url=[url]"},{"Download Audio": host_url+"/audio?url=[url]"}]}
+  return info
 
 @app.route("/data",methods=['GET'])
 async def get_ytdata():
@@ -52,7 +54,7 @@ async def get_ytdata():
       minutes = (seconds_minus_hours - (seconds_minus_hours % 60) )/60
       seconds = seconds_minus_hours - minutes*60
 
-      time = '{}:{}:{}'.format(int(hours), int(minutes), int(seconds))
+      time = '{:02d}:{:02d}:{:02d}'.format(int(hours), int(minutes), int(seconds))
 
 
       view_count = info_dict.get('view_count', None)
